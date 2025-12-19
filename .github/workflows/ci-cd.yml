@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "Repo structure:"
           ls -R
-          docker build -t $IMAGE .
+          docker buildx build -t $IMAGE .
           docker push $IMAGE
 
 
