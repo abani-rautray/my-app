@@ -32,11 +32,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build & Push Docker image
         run: |
-          echo "Repo structure:"
-          ls -R
-          docker buildx build -t $IMAGE .
+          IMAGE="ghcr.io/${GHCR_OWNER}/${IMAGE_NAME}:${{ github.sha }}"
+          echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
+          docker build -t $IMAGE .
           docker push $IMAGE
 
 
