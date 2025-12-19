@@ -32,12 +32,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & Push Docker image
+      - name: Build and push Docker image
         run: |
-          IMAGE="ghcr.io/${GHCR_OWNER}/${IMAGE_NAME}:${{ github.sha }}"
-          echo "IMAGE=${IMAGE}" >> $GITHUB_ENV
-          docker build -t $IMAGE -f app/Dockerfile app
+          echo "Repo structure:"
+          ls -R
+          docker build -t $IMAGE .
           docker push $IMAGE
+
 
       - name: Checkout GitOps Repo
         uses: actions/checkout@v4
